@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw_enem
+    project: affable-envoy-482112-d9
+    dataset: enem
+    tables:
+      - name: stg_enem_2024
