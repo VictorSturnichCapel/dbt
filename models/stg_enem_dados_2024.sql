@@ -2,9 +2,9 @@
 {{ config(materialized='table') }}
 
 SELECT 
-    NU_SEQUENCIAL,
-    NU_ANO,
-    CO_ESCOLA,
+    NU_SEQUENCIAL AS id,
+    NU_ANO AS year_test,
+    CO_ESCOLA AS id_school,
     CO_MUNICIPIO_ESC,
     NO_MUNICIPIO_ESC,
     CO_UF_ESC,
