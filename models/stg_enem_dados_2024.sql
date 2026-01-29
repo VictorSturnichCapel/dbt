@@ -74,4 +74,6 @@ renamed AS (
 
     FROM source
 )
+
+
 SELECT * FROM renamed
