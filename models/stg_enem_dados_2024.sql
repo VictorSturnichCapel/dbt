@@ -24,7 +24,7 @@ renamed AS (
         CAST(CO_MUNICIPIO_ESC AS STRING) AS school_city_id,
         INITCAP(NO_MUNICIPIO_ESC) AS school_city_name,
         SG_UF_ESC AS school_state,
-        TP_DEPENDENCIA_ADM_ESC AS school_admin_type_id, -- Sugere-se criar tabela dimensão para decodificar
+        TP_DEPENDENCIA_ADM_ESC AS school_admin_type_id,
         TP_LOCALIZACAO_ESC AS school_location_type_id,
         TP_SIT_FUNC_ESC AS school_status_id,
 
@@ -61,16 +61,16 @@ renamed AS (
         SAFE_CAST(NU_NOTA_COMP5 AS INT64) AS essay_competence_5_score,
         SAFE_CAST(NU_NOTA_REDACAO AS INT64) AS essay_total_score,
 
-        -- Metadados de Respostas (Opcional manter na staging se for usar para análise de itens)
+        -- Metadados de Respostas
         TP_LINGUA AS foreign_language_type, -- 0=Inglês, 1=Espanhol
-        TX_RESPOSTAS_CN AS natural_sciences_answers,
-        TX_RESPOSTAS_CH AS humanities_answers,
-        TX_RESPOSTAS_LC AS languages_answers,
-        TX_RESPOSTAS_MT AS math_answers,
-        TX_GABARITO_CN AS natural_sciences_key,
-        TX_GABARITO_CH AS humanities_key,
-        TX_GABARITO_LC AS languages_key,
-        TX_GABARITO_MT AS math_key
+        TX_RESPOSTAS_CN AS natural_sciences_student_answers,
+        TX_RESPOSTAS_CH AS humanities_student_answers,
+        TX_RESPOSTAS_LC AS languages_student_answers,
+        TX_RESPOSTAS_MT AS math_student_answers,
+        TX_GABARITO_CN AS natural_correct_answers,
+        TX_GABARITO_CH AS humanities_correct_answers,
+        TX_GABARITO_LC AS languages_correct_answers,
+        TX_GABARITO_MT AS math_correct_answers
 
     FROM source
 )
