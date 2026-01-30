@@ -6,3 +6,20 @@ sources:
     dataset: enem
     tables:
       - name: stg_enem_2024
+
+version: 2
+
+sources:
+  - name: enem
+    # A recomendação moderna é colocar metadados de banco dentro de config
+    config:
+      dataset: enem # <--- Substitua pelo nome real do seu dataset
+    
+    tables:
+      - name: stg_enem_2024 # <--- Nome da tabela bruta no BigQuery
+        description: "Tabela bruta com os microdados do ENEM 2024"
+        columns:
+          - name: NU_INSCRICAO
+            tests:
+              - unique
+              - not_null
