@@ -10,7 +10,7 @@ sources:
       - name: stg_enem_2024 # <--- Nome da tabela bruta no BigQuery
         description: "Tabela bruta com os microdados do ENEM 2024"
         columns:
-          - name: NU_INSCRICAO
+          - name: NU_SEQUENCIAL
             tests:
               - unique
               - not_null
