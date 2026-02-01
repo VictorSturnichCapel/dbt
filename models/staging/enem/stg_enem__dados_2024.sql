@@ -10,7 +10,7 @@
 */
 
 WITH source AS (
-    SELECT * FROM {{ source('enem', 'stg_enem_2024') }}
+    SELECT * FROM {{ source('enem', 'raw_enem_2024') }}
 ),
 
 renamed AS (
