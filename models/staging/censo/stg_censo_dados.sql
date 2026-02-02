@@ -11,6 +11,6 @@
 
 WITH source AS (
     SELECT * FROM {{ source('censo', 'raw_censo_2024') }}
-),
+)
 
 SELECT * FROM source
