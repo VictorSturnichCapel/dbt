@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: censo  # Nome que você usa dentro do {{ source('censo', '...') }}
+    database: affable-envoy-482112-d9  # ID do seu projeto no Google Cloud
+    schema: censo  # Nome do Dataset no BigQuery
+    tables:
+      - name: raw_censo_2024
