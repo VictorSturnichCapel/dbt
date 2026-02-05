@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: enem_staging  # Nome que você usa dentro do {{ source('censo', '...') }}
+    database: affable-envoy-482112-d9  # ID do seu projeto no Google Cloud
+    schema: enem_staging  # Nome do Dataset no BigQuery
+    tables:
+      - name: stg_enem__dados_2024
