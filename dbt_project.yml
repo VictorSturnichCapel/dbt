@@ -40,10 +40,14 @@ models:
     # Camada Staging: Leve e rápida
     staging:
       +materialized: view
-      censo:
-        +schema: censo
+      
+      # Subpasta para os modelos do ENEM
       enem:
-        +schema: enem
+        +schema: enem_staging
+        
+      # Subpasta para os modelos do CENSO
+      censo:
+        +schema: censo_staging
 
     # Camada Intermediate: Transformações complexas
     intermediate:
