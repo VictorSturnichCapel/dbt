@@ -1,15 +1,5 @@
 {{ config(
     materialized='table',
-    partition_by={
-      "field": "census_year",
-      "data_type": "int64",
-      "range": {
-        "start": 2020,
-        "end": 2030,
-        "interval": 1
-      }
-    },
-    cluster_by=['state_code', 'school_id'],
     tags=['censo', 'intermediate']
 ) }}
 
