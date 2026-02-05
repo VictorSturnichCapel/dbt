@@ -40,7 +40,10 @@ models:
     # Camada Staging: Leve e rápida
     staging:
       +materialized: view
-      +schema: staging      # Opcional: cria um esquema separado no seu DB
+      censo:
+        +schema: censo
+      enem:
+        +schema: enem
 
     # Camada Intermediate: Transformações complexas
     intermediate:
