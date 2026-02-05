@@ -51,7 +51,14 @@ models:
 
     # Camada Intermediate: Transformações complexas
     intermediate:
-      +materialized: ephemeral # Economiza espaço, o dbt cria CTEs em vez de tabelas
+      +materialized: table
+      # Subpasta para os modelos do ENEM
+      enem:
+        +schema: enem_int
+        
+      # Subpasta para os modelos do CENSO
+      censo:
+        +schema: censo_int
 
     # Camada Marts/Business: Onde o BI consome os dados
     marts:
