@@ -12,6 +12,7 @@ calculated AS (
         school_id,
         school_name,
         dependency_type_id,
+        school_type,
         -- Criando um score de tecnologia (0 a 3)
         (CAST(has_internet AS INT) + CAST(has_broadband AS INT) + CAST(has_it_lab AS INT)) AS tech_score,
         -- Criando um score de instalações (0 a 3)
