@@ -15,29 +15,40 @@ school_metrics AS (
         exam_year,
         
         -- Contagem de Alunos
-        COUNT(student_id) AS total_students_registered,
+        COUNT(student_id) AS total_students,
         
         -- Médias de Notas (SAFE_AVG para evitar divisões por zero ou nulos)
-        AVG(natural_sciences_score) AS avg_score_natural_sciences,
-        AVG(humanities_score) AS avg_score_humanities,
-        AVG(languages_score) AS avg_score_languages,
-        AVG(math_score) AS avg_score_math,
-        AVG(essay_total_score) AS avg_score_essay,
-        
-        -- Cálculo de Presença (Taxa de comparecimento)
-        -- Usando a média de um booleano/int para obter o %
-        AVG(CAST(is_present_natural_sciences AS INT64)) AS attendance_rate_day_1,
-        AVG(CAST(is_present_math AS INT64)) AS attendance_rate_day_2
+        ROUND(AVG(natural_sciences_score), 2) AS avg_score_natural_sciences,
+        ROUND(AVG(humanities_score), 2) AS avg_score_humanities,
+        ROUND(AVG(languages_score), 2) AS avg_score_languages,
+        ROUND(AVG(math_score), 2) AS avg_score_math,
+        ROUND(AVG(essay_total_score), 2) AS avg_score_essay,
 
     FROM staging_enem
+    -- Needs to go on both days and do not zero essay
+    WHERE 1=1
+    AND (is_present_natural_sciences + is_present_humanities + is_present_languages + is_present_math) = 4
+    AND essay_total_score > 0
     GROUP BY 1, 2, 3
+    -- Having more than 9 students per school
+    HAVING COUNT(school_id) > 9
 ),
 
 final AS (
     SELECT
         *,
+        RANK() OVER(
+            PARTITION BY exam_year 
+            ORDER BY (
+                COALESCE(avg_score_natural_sciences, 0) + 
+                COALESCE(avg_score_humanities, 0) + 
+                COALESCE(avg_score_languages, 0) + 
+                COALESCE(avg_score_math, 0) + 
+                COALESCE(avg_score_essay, 0)
+            ) / 5 DESC
+        ) AS general_rank,
         -- Nota Geral da Escola (Média das médias)
-        (avg_score_natural_sciences + avg_score_humanities + avg_score_languages + avg_score_math + avg_score_essay) / 5 AS school_general_average
+        ROUND((avg_score_natural_sciences + avg_score_humanities + avg_score_languages + avg_score_math + avg_score_essay) / 5, 2) AS school_general_average
     FROM school_metrics
 )
 
