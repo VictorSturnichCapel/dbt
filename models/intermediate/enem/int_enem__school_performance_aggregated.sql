@@ -31,7 +31,7 @@ school_metrics AS (
     WHERE 1=1
     AND (is_present_natural_sciences + is_present_humanities + is_present_languages + is_present_math) = 4
     AND essay_total_score > 0
-    GROUP BY 1, 2, 3, 4
+    GROUP BY 1, 2, 3, 4, 5
     -- Having more than 9 students per school
     HAVING COUNT(school_id) > 9
 ),
