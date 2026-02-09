@@ -47,6 +47,16 @@ final AS (
                 COALESCE(avg_score_essay, 0)
             ) / 5 DESC
         ) AS general_rank,
+        RANK() OVER(
+            PARTITION BY exam_year, school_state
+            ORDER BY (
+                COALESCE(avg_score_natural_sciences, 0) + 
+                COALESCE(avg_score_humanities, 0) + 
+                COALESCE(avg_score_languages, 0) + 
+                COALESCE(avg_score_math, 0) + 
+                COALESCE(avg_score_essay, 0)
+            ) / 5 DESC
+        ) AS general_state_rank,
         -- Nota Geral da Escola (Média das médias)
         ROUND((avg_score_natural_sciences + avg_score_humanities + avg_score_languages + avg_score_math + avg_score_essay) / 5, 2) AS school_general_average
     FROM school_metrics
