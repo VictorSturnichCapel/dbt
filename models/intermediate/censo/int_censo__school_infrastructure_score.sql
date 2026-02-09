@@ -11,6 +11,7 @@ calculated AS (
     SELECT
         school_id,
         school_name,
+        state_code,
         dependency_type_id,
         school_type,
         -- Criando um score de tecnologia (0 a 3)
