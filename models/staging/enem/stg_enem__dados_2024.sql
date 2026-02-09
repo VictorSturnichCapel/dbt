@@ -25,6 +25,7 @@ renamed AS (
         INITCAP(NO_MUNICIPIO_ESC) AS school_city_name,
         SG_UF_ESC AS school_state,
         TP_DEPENDENCIA_ADM_ESC AS school_admin_type_id,
+        CASE WHEN CAST(TP_DEPENDENCIA_ADM_ESC AS INT) = 4 THEN 'Privada' ELSE 'Pública' END AS school_type,
         TP_LOCALIZACAO_ESC AS school_location_type_id,
         TP_SIT_FUNC_ESC AS school_status_id,
 

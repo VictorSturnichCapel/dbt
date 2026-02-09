@@ -13,7 +13,9 @@ school_metrics AS (
         school_id,
         school_state,
         exam_year,
-        
+        school_city_name,
+        school_type,
+
         -- Contagem de Alunos
         COUNT(student_id) AS total_students,
         
@@ -29,7 +31,7 @@ school_metrics AS (
     WHERE 1=1
     AND (is_present_natural_sciences + is_present_humanities + is_present_languages + is_present_math) = 4
     AND essay_total_score > 0
-    GROUP BY 1, 2, 3
+    GROUP BY 1, 2, 3, 4
     -- Having more than 9 students per school
     HAVING COUNT(school_id) > 9
 ),
@@ -57,6 +59,46 @@ final AS (
                 COALESCE(avg_score_essay, 0)
             ) / 5 DESC
         ) AS general_state_rank,
+        RANK() OVER(
+            PARTITION BY exam_year, school_state, school_city_name
+            ORDER BY (
+                COALESCE(avg_score_natural_sciences, 0) + 
+                COALESCE(avg_score_humanities, 0) + 
+                COALESCE(avg_score_languages, 0) + 
+                COALESCE(avg_score_math, 0) + 
+                COALESCE(avg_score_essay, 0)
+            ) / 5 DESC
+        ) AS general_city_rank,
+        RANK() OVER(
+            PARTITION BY exam_year, school_type 
+            ORDER BY (
+                COALESCE(avg_score_natural_sciences, 0) + 
+                COALESCE(avg_score_humanities, 0) + 
+                COALESCE(avg_score_languages, 0) + 
+                COALESCE(avg_score_math, 0) + 
+                COALESCE(avg_score_essay, 0)
+            ) / 5 DESC
+        ) AS general_type_rank,
+        RANK() OVER(
+            PARTITION BY exam_year, school_type, school_state
+            ORDER BY (
+                COALESCE(avg_score_natural_sciences, 0) + 
+                COALESCE(avg_score_humanities, 0) + 
+                COALESCE(avg_score_languages, 0) + 
+                COALESCE(avg_score_math, 0) + 
+                COALESCE(avg_score_essay, 0)
+            ) / 5 DESC
+        ) AS general_type_state_rank,
+        RANK() OVER(
+            PARTITION BY exam_year, school_type, school_state, school_city_name
+            ORDER BY (
+                COALESCE(avg_score_natural_sciences, 0) + 
+                COALESCE(avg_score_humanities, 0) + 
+                COALESCE(avg_score_languages, 0) + 
+                COALESCE(avg_score_math, 0) + 
+                COALESCE(avg_score_essay, 0)
+            ) / 5 DESC
+        ) AS general_type_city_rank,
         -- Nota Geral da Escola (Média das médias)
         ROUND((avg_score_natural_sciences + avg_score_humanities + avg_score_languages + avg_score_math + avg_score_essay) / 5, 2) AS school_general_average
     FROM school_metrics
