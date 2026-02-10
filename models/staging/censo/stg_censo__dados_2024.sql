@@ -27,7 +27,7 @@ renamed AS (
         CAST(CO_CEP AS STRING) AS zip_code,
 
         -- School Identification
-        CAST(CO_ENTIDADE AS INT) AS school_id,
+        CAST(CO_ENTIDADE AS STRING) AS school_id,
         NO_ENTIDADE AS school_name,
         CAST(TP_DEPENDENCIA AS INT) AS dependency_type_id,
         CASE WHEN CAST(TP_DEPENDENCIA AS INT) = 4 THEN 'Privada' ELSE 'Pública' END AS school_type,
