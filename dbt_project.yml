@@ -63,4 +63,4 @@ models:
     # Camada Marts/Business: Onde o BI consome os dados
     marts:
       +materialized: table
-      +schema: business     # Opcional: organiza as tabelas finais para os analistas
+      +schema: business     # Organiza as tabelas finais
