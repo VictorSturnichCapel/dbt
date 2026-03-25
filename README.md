@@ -1,7 +1,7 @@
 # 🎓 Data Warehouse Educacional: ENEM & CENSO
 ### Projeto dbt: `dbt_dw_victor`
 
-Este repositório contém o projeto **dbt** (data build tool) para a modelagem e transformação dos microdados da educação brasileira, integrando os resultados do **ENEM** com os dados estruturais do **Censo Escolar**.
+Este repositório contém o projeto **dbt** (data build tool) para a modelagem e transformação dos microdados da educação brasileira, integrando os resultados do **ENEM** com os dados estruturais do **Censo Escolar** com informações escolares.
 
 ---
 
