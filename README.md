@@ -31,4 +31,3 @@ O projeto segue as melhores práticas de Analytics Engineering, dividindo as tra
 Caso o projeto utilize pacotes externos (como `dbt_utils`), execute:
 ```bash
 dbt deps
-
